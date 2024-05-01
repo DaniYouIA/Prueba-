@@ -1,0 +1,70 @@
+import UIKit
+
+class GuideViewController: UIViewController {
+    
+    var availableJobs: [Job] = [] // Variable que contiene la lista de trabajos disponibles
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Configuración inicial de la vista
+        fetchAvailableJobs() // Llama a la función para obtener los trabajos disponibles
+    }
+    
+    // Función para obtener los trabajos disponibles (simulada)
+    func fetchAvailableJobs() {
+        // Simulación de la obtención de trabajos disponibles desde un servidor o base de datos
+        let job1 = Job(title: "Guía turístico", description: "Recorrido por la ciudad", location: "Ciudad X")
+        let job2 = Job(title: "Asistente personal", description: "Ayuda con tareas diarias", location: "Ciudad Y")
+        availableJobs = [job1, job2]
+    }
+    
+    // Funciones para gestionar las interacciones del usuario y mostrar la información necesaria
+    
+    func showAvailableJobs() {
+        // Lógica para mostrar los trabajos disponibles
+    }
+    
+    func showProfile() {
+        // Lógica para mostrar el perfil del usuario o del guía
+    }
+    
+    func navigateToJobDetails(job: Job) {
+        // Lógica para mostrar detalles de un trabajo específico
+    }
+    
+    func acceptJob(job: Job) {
+        // Lógica para aceptar un trabajo y confirmar la disponibilidad del guía
+    }
+    
+    // Otras funciones y métodos necesarios para la funcionalidad de la aplicación
+}
+
+struct Job {
+    let title: String
+    let description: String
+    let location: String
+    // Otros atributos relevantes para un trabajo
+}
+
+// Clases adicionales, estructuras y extensiones según sea necesario
+
+extension GuideViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Devuelve la cantidad de trabajos disponibles
+        return availableJobs.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "JobCell", for: indexPath)
+        let job = availableJobs[indexPath.row]
+        // Configura la celda con los detalles del trabajo
+        cell.textLabel?.text = job.title
+        cell.detailTextLabel?.text = job.location
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedJob = availableJobs[indexPath.row]
+        navigateToJobDetails(job: selectedJob)
+    }
+}
